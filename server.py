@@ -16,11 +16,11 @@ def start_connection(HOST, PORT):
 
                 for socks in read_sockets:
                     if socks == conn:
-                        message = socks.recv(2048) #decode ?? 
+                        message = socks.recv(2048).decode('UTF-8') #decode ?? 
                         print(message)
                     else:
                         message = sys.stdin.readline()
-                        server.send(message)
+                        server.send(message.encode('UTF-8'))
                         sys.stdout.write("<You>")
                         sys.stdout.write(message)
                         sys.stdout.flush()
