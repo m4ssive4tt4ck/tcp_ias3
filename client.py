@@ -19,6 +19,8 @@ def start_connection(HOST, PORT):
                 sys.stdout.write("<You>")
                 sys.stdout.write(message)
                 sys.stdout.flush()
+    server.close()
+
 
 if __name__ == '__main__':
     # checks whether sufficient arguments have been provided
