@@ -7,7 +7,7 @@ def start_connection(HOST, PORT):
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
     server.connect((HOST, PORT))
     while True:
-        read_sockets, write_socket, error_socket = select.select([sys.stdin, server], [], [socket.timeout]) #ka Obs timeout do irgendwas macht tbh
+        read_sockets, write_socket, error_socket = select.select([sys.stdin, server], [], []) #ka Obs timeout do irgendwas macht tbh
 
         for socks in read_sockets:
             if socks == server:
@@ -20,7 +20,6 @@ def start_connection(HOST, PORT):
                 sys.stdout.write(message)
                 sys.stdout.flush()
     server.close()
-
 
 if __name__ == '__main__':
     # checks whether sufficient arguments have been provided
