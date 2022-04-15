@@ -12,7 +12,7 @@ def start_connection(HOST, PORT):
         with conn: 
             print(f"Connected by {addr}")
             while True:
-                read_sockets, write_socket, error_socket = select.select([sys.stdin, conn], [], [socket.timeout]) #select so it doesn't block
+                read_sockets, write_socket, error_socket = select.select([sys.stdin, conn], [], []) #select so it doesn't block
 
                 for socks in read_sockets:
                     if socks == conn:
