@@ -21,8 +21,8 @@ def start_connection(HOST, PORT):
                             break
                         print(message)
                     else:
-                        message = sys.stdin.readline()
-                        server.send(message.encode())
+                        message = sys.stdin.readline().encode()
+                        server.send(message)
                         sys.stdout.write("<You>")
                         sys.stdout.write(message)
                         sys.stdout.flush()
