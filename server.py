@@ -22,20 +22,16 @@ def start_connection(HOST, PORT):
                                 break
                             print(message)
                         except: 
-                            conn.close(); 
                             print("connection closed") 
+                            conn.close(); 
                             break
                     else:
-                        try: 
-                            message = sys.stdin.readline().encode('UTF-8')
-                            server.send(message)
-                            sys.stdout.write("<You>")
-                            sys.stdout.write(message)
-                            sys.stdout.flush()
-                        except: 
-                            print("an error occurred")
-                            server.close(); 
-                            break
+                        message = sys.stdin.readline().encode('UTF-8')
+                        server.send(message)
+                        sys.stdout.write("<You>")
+                        sys.stdout.write(message)
+                        sys.stdout.flush()
+                      
  #   server.close()
 
 if __name__ == '__main__':
