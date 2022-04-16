@@ -7,32 +7,24 @@ def start_connection(HOST, PORT):
 
     server.bind((HOST, PORT)) 
     server.listen(5) #listens for 5 active connections
-    while True: 
-        conn, addr = server.accept()
-        with conn: 
-            print(f"Connected by {addr}")
-            while True:
-                read_sockets, write_socket, error_socket = select.select([sys.stdin, conn], [], [], 0) #select so it doesn't block
 
-                for socks in read_sockets:
-                    if socks == conn:
-                        try:
-                            message = socks.recv(2048).decode('UTF-8') 
-                            if message == b'': 
-                                break
-                            print(message)
-                        except: 
-                            print("connection closed") 
-                            conn.close(); 
+    try: 
+        while True: 
+            conn, addr = server.accept()
+            read_sockets, write_socket, error_socket = select.select([sys.stdin, conn], [], [], 0) #select so it doesn't block
+
+            for socks in read_sockets:
+                if socks == conn:
+                        message = socks.recv(2048).decode('UTF-8') 
+                        if message == b'': 
                             break
-                    else:
-                        message = sys.stdin.readline().encode('UTF-8')
-                        server.send(message, socket.MSG_NOSIGNAL)
-                        sys.stdout.write("<You>")
-                        sys.stdout.write(message)
-                        sys.stdout.flush()
-                      
- #   server.close()
+                        print(message)
+                else:
+                    message = sys.stdin.readline().encode('UTF-8')
+                    server.send(message)
+                    print("I wrote: ", message)
+    finally: 
+        server.close()
 
 if __name__ == '__main__':
    # checks whether sufficient arguments have been provided
