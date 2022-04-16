@@ -13,7 +13,7 @@ def start_connection(HOST, PORT):
 
             for socks in read_sockets:
                 if socks == server:
-                    message = socks.recv(2048).decode('UTF-8')
+                    message = server.recv(2048).decode('UTF-8')
                     print(message)
                 else:
                     message = sys.stdin.readline()
