@@ -16,7 +16,7 @@ def start_connection(HOST, PORT):
                     print(message)
                 except:
                     print("An error occurred!")
-                    server.close()
+                    # server.close()
                     break
             else:
                 message = sys.stdin.readline()
