@@ -13,13 +13,8 @@ def start_connection(HOST, PORT):
 
         for socks in read_sockets:
             if socks == server:
-                try:
-                    message = socks.recv(2048).decode('UTF-8')
-                    print(message)
-                except:
-                    print("An error occurred!")
-                    server.close()
-                    break
+                message = socks.recv(2048).decode('UTF-8')
+                print(message)
             else:
                 message = sys.stdin.readline()
                 server.sendall(message.encode('UTF-8'))

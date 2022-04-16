@@ -7,7 +7,7 @@ def start_connection(HOST, PORT):
 
     server.bind((HOST, PORT)) 
     server.listen(5) #listens for 5 active connections
-    
+
     while True: 
         conn, addr = server.accept()
         with conn: 
@@ -17,15 +17,10 @@ def start_connection(HOST, PORT):
 
                 for socks in read_sockets:
                     if socks == conn:
-                        try:
-                            message = socks.recv(2048).decode('UTF-8') 
-                            if message == b'': 
-                                break
-                            print(message)
-                        except: 
-                            print("connection closed") 
-                            conn.close(); 
+                        message = socks.recv(2048).decode('UTF-8') 
+                        if message == b'': 
                             break
+                        print(message)
                     else:
                         message = sys.stdin.readline().encode('UTF-8')
                         server.send(message)
