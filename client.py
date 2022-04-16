@@ -8,25 +8,27 @@ def start_connection(HOST, PORT):
     server.bind(('192.168.112.100', 54322)) 
     server.connect((HOST, PORT))
 
-    try: 
-        while True: 
-            read_sockets, write_socket, error_socket = select.select([sys.stdin, server], [], [], 0) #select so it doesn't block
+    while True:
+        read_sockets, write_socket, error_socket = select.select([sys.stdin, server], [], [], 0) #ka Obs timeout do irgendwas macht tbh
 
-            for socks in read_sockets:
-                if socks == server:
-                        message = socks.recv(2048).decode('UTF-8') 
-                        if message == b'': 
-                            break
-                        print(message)
-                else:
-                    message = sys.stdin.readline().encode('UTF-8')
-                    server.send(message)
-                    print("I wrote: ", message)
-    finally: 
-        server.close()
-             
-            
-               
+        for socks in read_sockets:
+            if socks == server:
+                try:
+                    message = socks.recv(2048).decode('UTF-8')
+                    print(message)
+                except:
+                    print("An error occurred!")
+                    server.close()
+                    break
+            else:
+                message = sys.stdin.readline()
+                server.send(message.encode('UTF-8'))
+                sys.stdout.write("<You>")
+                sys.stdout.write(message)
+                sys.stdout.flush()
+    
+    server.close()
+    #todo: close socket
 
 if __name__ == '__main__':
     # checks whether sufficient arguments have been provided
