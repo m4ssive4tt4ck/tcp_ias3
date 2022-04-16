@@ -11,6 +11,8 @@ def start_connection(HOST, PORT):
     try: 
         while True: 
             conn, addr = server.accept()
+            print(f"Connected by {addr}")
+
             read_sockets, write_socket, error_socket = select.select([sys.stdin, conn], [], [], 0) #select so it doesn't block
 
             for socks in read_sockets:
