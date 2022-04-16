@@ -23,7 +23,7 @@ def start_connection(HOST, PORT):
                         else:
                             message = sys.stdin.readline()
                             print("message test", message)
-                            server.send(message.encode('UTF-8'))
+                            conn.send(message.encode('UTF-8'))
                             sys.stdout.write("<You>")
                             sys.stdout.write(message)
                             sys.stdout.flush()
