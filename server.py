@@ -19,7 +19,7 @@ def start_connection(HOST, PORT):
                             message = socks.recv(2048).decode('UTF-8') 
                             if message == b'': 
                                 break
-                            print(message)
+                            print("Client: ", message)
                         else:
                             message = sys.stdin.readline()
                             conn.send(message.encode('UTF-8'))
