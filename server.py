@@ -26,11 +26,15 @@ def start_connection(HOST, PORT):
                             print("connection closed") 
                             break
                     else:
-                        message = sys.stdin.readline().encode('UTF-8')
-                        server.send(message)
-                        sys.stdout.write("<You>")
-                        sys.stdout.write(message)
-                        sys.stdout.flush()
+                        try: 
+                            message = sys.stdin.readline().encode('UTF-8')
+                            server.send(message)
+                            sys.stdout.write("<You>")
+                            sys.stdout.write(message)
+                            sys.stdout.flush()
+                        except: 
+                            server.close(); 
+                            break
  #   server.close()
 
 if __name__ == '__main__':

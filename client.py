@@ -19,12 +19,15 @@ def start_connection(HOST, PORT):
                     server.close()
                     break
             else:
-                message = sys.stdin.readline()
-                server.send(message.encode('UTF-8'))
-                sys.stdout.write("<You>")
-                sys.stdout.write(message)
-                sys.stdout.flush()
- #   server.close()
+                try:
+                    message = sys.stdin.readline()
+                    server.send(message.encode('UTF-8'))
+                    sys.stdout.write("<You>")
+                    sys.stdout.write(message)
+                    sys.stdout.flush()
+                except: 
+                    server.close()
+                    break
 
 if __name__ == '__main__':
     # checks whether sufficient arguments have been provided
