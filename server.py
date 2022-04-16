@@ -33,6 +33,7 @@ def start_connection(HOST, PORT):
                             sys.stdout.write(message)
                             sys.stdout.flush()
                         except: 
+                            print("an error occurred")
                             server.close(); 
                             break
  #   server.close()
