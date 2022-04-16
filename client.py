@@ -22,7 +22,7 @@ def start_connection(HOST, PORT):
                     break
             else:
                 message = sys.stdin.readline()
-                server.send(message.encode('UTF-8'))
+                server.sendall(message.encode('UTF-8'))
                 sys.stdout.write("<You>")
                 sys.stdout.write(message)
                 sys.stdout.flush()
