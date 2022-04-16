@@ -16,10 +16,15 @@ def start_connection(HOST, PORT):
 
                 for socks in read_sockets:
                     if socks == conn:
-                        message = socks.recv(2048).decode('UTF-8') 
-                        if message == b'': 
+                        try:
+                            message = socks.recv(2048).decode('UTF-8') 
+                            if message == b'': 
+                                break
+                            print(message)
+                        except: 
+                            conn.close(); 
+                            print("connection closed") 
                             break
-                        print(message)
                     else:
                         message = sys.stdin.readline().encode('UTF-8')
                         server.send(message)
