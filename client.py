@@ -8,12 +8,11 @@ def start_connection(HOST, PORT):
     server.connect((HOST, PORT))
 
     try: 
-        conn, addr = server.accept()
         while True: 
-            read_sockets, write_socket, error_socket = select.select([sys.stdin, conn], [], [], 0) #select so it doesn't block
+            read_sockets, write_socket, error_socket = select.select([sys.stdin, server], [], [], 0) #select so it doesn't block
 
             for socks in read_sockets:
-                if socks == conn:
+                if socks == server:
                         message = socks.recv(2048).decode('UTF-8') 
                         if message == b'': 
                             break
