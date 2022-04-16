@@ -27,7 +27,7 @@ def start_connection(HOST, PORT):
                             sys.stdout.write("<You>")
                             sys.stdout.write(message)
                             sys.stdout.flush()
-    finally: 
+    except: 
         server.close()
 
 if __name__ == '__main__':
