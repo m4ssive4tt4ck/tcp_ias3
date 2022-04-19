@@ -3,9 +3,9 @@ import socket
 import select
 
 
-def start_connection(HOST, PORT):
+def start_connection(BIND_IP, HOST, PORT):
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
-    server.bind(('192.168.112.112', 54322)) 
+    server.bind((BIND_IP, 54322)) 
     server.connect((HOST, PORT))
     try:
         while True:
@@ -26,7 +26,7 @@ def start_connection(HOST, PORT):
 
 if __name__ == '__main__':
     # checks whether sufficient arguments have been provided
-    if len(sys.argv) != 3:
-        print("Correct usage: script, IP address, port number")
+    if len(sys.argv) != 4:
+        print("Correct usage: script, IP of the Client, Host IP address, port number")
         exit()
-    start_connection(str(sys.argv[1]), int(sys.argv[2]))
+    start_connection(str(sys.argv[1]), str(sys.argv[2]), int(sys.argv[3]))
