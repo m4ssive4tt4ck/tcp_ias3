@@ -5,7 +5,6 @@ import select
 
 def start_connection(HOST, PORT):
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
-    server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     server.bind(('192.168.112.112', 54322)) 
     server.connect((HOST, PORT))
     try:
