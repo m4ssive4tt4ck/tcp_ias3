@@ -4,6 +4,7 @@ import select
 
 def start_connection(HOST, PORT):
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #create socket (af_inet for ipv4 addresses, sock_stream for tcp) 
+    server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     server.bind((HOST, PORT)) 
     server.listen(5) #listens for 5 active connections
     try: 
