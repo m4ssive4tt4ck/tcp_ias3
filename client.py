@@ -10,7 +10,7 @@ def start_connection(HOST, PORT):
     server.connect((HOST, PORT))
     try:
         while True:
-            read_sockets, write_socket, error_socket = select.select([sys.stdin, server], [], [], 0) #ka Obs timeout do irgendwas macht tbh
+            read_sockets, write_socket, error_socket = select.select([sys.stdin, server], [], [], 0) 
 
             for socks in read_sockets:
                 if socks == server:
@@ -22,7 +22,7 @@ def start_connection(HOST, PORT):
                     sys.stdout.write("<You>")
                     sys.stdout.write(message)
                     sys.stdout.flush()
-    except: 
+    finally: 
         server.close()
 
 if __name__ == '__main__':
