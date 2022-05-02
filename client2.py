@@ -4,7 +4,7 @@ import select
 
 def start_connection(HOST, PORT):
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
-    server.bind('192.168.112.113', 54322) 
+    server.bind(('192.168.112.113', 54322))
     server.connect((HOST, PORT))
 
     try: 
