@@ -10,7 +10,6 @@ def start_connection(HOST, PORT):
     server.listen(5) #listens for 5 active connections
     try:
         while True: 
-            time.sleep(0.01)
             #wait(50) ms --> weil sonst spikt CPU nutzung 
             conn, addr = server.accept()
             with conn: 
