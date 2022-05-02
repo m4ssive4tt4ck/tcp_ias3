@@ -16,7 +16,7 @@ def start_connection(BIND_IP, HOST, PORT):
             for socks in read_sockets:
                 if socks == server:
                     message = server.recv(512).decode('UTF-8')
-                    print("Server", message)
+                    # print("Server", message)
                 else:
                     message = sys.stdin.readline()
                     server.send(message.encode('UTF-8'))
