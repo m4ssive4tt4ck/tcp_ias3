@@ -2,9 +2,6 @@ import sys
 import socket
 import select
 
-from command_line_interpreter_client_UDP import *
-
-
 def start_connection(HOST, PORT):
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
     server.bind('192.168.112.100', 54322) 
