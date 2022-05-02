@@ -7,26 +7,26 @@ def start_connection(HOST, PORT):
     server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     server.bind((HOST, PORT)) 
     server.listen(5) #listens for 5 active connections
-    try: 
+    try:
         while True: 
+            #wait(50) ms --> weil sonst spikt CPU nutzung 
             conn, addr = server.accept()
             with conn: 
                 print(f"Connected by {addr}")
-                while True:
-                    read_sockets, write_socket, error_socket = select.select([sys.stdin, conn], [], [], 0) #select so it doesn't block
+                read_sockets, write_socket, error_socket = select.select([sys.stdin, conn], [], [], 0) #select so it doesn't block
 
-                    for socks in read_sockets:
-                        if socks == conn:
-                            message = socks.recv(2048).decode('UTF-8') 
-                            if message == b'': 
-                                break
-                            print("Client: ", message)
-                        else:
-                            message = sys.stdin.readline()
-                            conn.send(message.encode('UTF-8'))
-                            sys.stdout.write("<You>")
-                            sys.stdout.write(message)
-                            sys.stdout.flush()
+                for socks in read_sockets:
+                    if socks == conn:
+                        message = socks.recv(512).decode('UTF-8') 
+                        if message == b'': 
+                            break
+                        print("Client: ", message)
+                    else:
+                        message = sys.stdin.readline()
+                        conn.send(message.encode('UTF-8'))
+                        sys.stdout.write("<You>")
+                        sys.stdout.write(message)
+                        sys.stdout.flush()
     finally: 
         server.close()
 

@@ -1,4 +1,4 @@
-Start Server (Has to be started first): 
+Start Server (Has to be started before the client): 
 python3 server.py <server ip> <server port>
 
 
