@@ -1,6 +1,7 @@
 import socket
 import sys
 import select
+import time
 
 def start_connection(HOST, PORT):
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #create socket (af_inet for ipv4 addresses, sock_stream for tcp) 
@@ -9,6 +10,7 @@ def start_connection(HOST, PORT):
     server.listen(5) #listens for 5 active connections
     try:
         while True: 
+            time.sleep(0.01)
             #wait(50) ms --> weil sonst spikt CPU nutzung 
             conn, addr = server.accept()
             with conn: 

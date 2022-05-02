@@ -1,6 +1,7 @@
 import sys
 import socket
 import select
+import time
 
 
 def start_connection(BIND_IP, HOST, PORT):
@@ -9,6 +10,7 @@ def start_connection(BIND_IP, HOST, PORT):
     server.connect((HOST, PORT))
     try:
         while True:
+            time.sleep(0.01)
             read_sockets, write_socket, error_socket = select.select([sys.stdin, server], [], [], 0) 
 
             for socks in read_sockets:
